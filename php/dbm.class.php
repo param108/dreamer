@@ -17,6 +17,7 @@ class dbm {
     $dsn = "mysql:dbname=$dbname;host=$host"; 
     try {
       $this->m_dbh = new PDO($dsn, $user, $pass);
+      $this->m_dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
       mylog( 'Connection failed: ' . $e->getMessage());
       die();

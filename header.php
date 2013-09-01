@@ -6,7 +6,6 @@ if (!array_key_exists('at',$_COOKIE)) {
 	die();
 }
 $data='junk';
-error_log("header: ".$_COOKIE['at']);
 if(!verify_token($_COOKIE['at'],$data)) {
 	error_log("unverified token");
 	header('location: /excel/login.php?redirect='.$_SERVER['REQUEST_URI']);
@@ -18,12 +17,12 @@ if ($data == 'junk') {
 	header('location: /excel/login.php?redirect='.$_SERVER['REQUEST_URI']);
 	die();
 }
-error_log($data);
 $pdata = json_decode($data,true);
-if (!($pdata['ip'] == $_SERVER['REMOTE_ADDR'] && $pdata['port'] == $_SERVER['REMOTE_PORT'])) {
+if ($pdata['ip'] != $_SERVER['REMOTE_ADDR']) {
 	error_log("ip/port mismatch in token:".$pdata['ip'].":".$pdata['port'].">".$_SERVER['REMOTE_ADDR'].":".$_SERVER['REMOTE_PORT']);
 	header('location: /excel/login.php?redirect='.$_SERVER['REQUEST_URI']);
 	die();
 }
 
+reset_token($_COOKIE['at']);
 // fall through into the destination url

@@ -30,3 +30,14 @@ sleep(15);
 if (verify_token($token)) {
 	die("Token did not expire");
 }
+
+$token = generate_token(10);
+sleep(5);
+reset_token($token);
+sleep(5);
+reset_token($token);
+sleep(5);
+reset_token($token);
+if(!verify_token($token)) {
+	die("Token expired early after reset");
+}

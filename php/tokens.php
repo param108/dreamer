@@ -60,3 +60,33 @@ function verify_token($token,&$data = null) {
 
 	return true;
 }
+
+function reset_token($token) {
+	$dbh = new dbm(DBHOST,'excel',DBUSER,DBPASS);
+	$stmt = $dbh->m_dbh->prepare("update user_session set created=FROM_UNIXTIME(:created) where session_key=:token;");
+	$created = time();
+	if (!$stmt->execute(array(':token'=>"$token",':created'=>"$created"))) {
+		$stmt->closeCursor();
+		return false;
+	}	
+	$stmt->closeCursor();
+	return true;
+}
+function dump_token($token) {
+	$dbh = new dbm(DBHOST,'excel',DBUSER,DBPASS);
+	$stmt = $dbh->m_dbh->prepare("select * from user_session where session_key=:token;");
+	if (!$stmt->execute(array(':token'=>$token))) {
+		error_log("verify_token sql failed");
+		return null;
+	}	
+	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	if (count($rows) == 0) {
+		error_log("verify_token sql failed: no rows in output");
+		return false;
+	}
+	print_r($rows);
+
+	return true;
+}
+
+
