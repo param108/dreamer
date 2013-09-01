@@ -27,7 +27,7 @@ function redirect_to_home() {
 	global $isAjax,$redirectUrl;
 	if ($isAjax) {
 		if ($redirectUrl != '') {
-			die('{"error":0,"redirect":'.$redirectUrl.'}');
+			die('{"error":0,"redirect":"'.$redirectUrl.'"}');
 		} else {
 			die('{"error":0,"redirect": ""}');
 		}
@@ -62,7 +62,6 @@ if (!$row || count($row) == 0) {
 } 
 
 # found the user now update the session
-session_start();
 $login_token = generate_token(600,'{"ip":"'.$_SERVER['REMOTE_ADDR'].'","port":"'.$_SERVER['REMOTE_PORT'].'"}');
-$_SESSION['at'] = $login_token;
+setcookie('at',$login_token);
 redirect_to_home();

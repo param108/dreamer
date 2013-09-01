@@ -36,20 +36,26 @@ function delete_token($token) {
 	$stmt->closeCursor();
 	return true;
 }
-function verify_token($token) {
+function verify_token($token,&$data = null) {
 	$dbh = new dbm(DBHOST,'excel',DBUSER,DBPASS);
-	$stmt = $dbh->m_dbh->prepare("select UNIX_TIMESTAMP(created),expiry from user_session where session_key=:token;");
+	$stmt = $dbh->m_dbh->prepare("select UNIX_TIMESTAMP(created),expiry,data from user_session where session_key=:token;");
 	if (!$stmt->execute(array(':token'=>$token))) {
+		error_log("verify_token sql failed");
 		return null;
 	}	
 	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	if (count($rows) == 0) {
+		error_log("verify_token sql failed: no rows in output");
 		return false;
 	}
 	$presentTime = time();	
-	if (abs($rows[0]["UNIX_TIMESTAMP(created)"]-$presentTime)>$rows[0]["expiry"]) {
+	if (abs($rows[0]['UNIX_TIMESTAMP(created)']-$presentTime)>$rows[0]['expiry']) {
+		error_log("verify_token failed: token expired");
 		delete_token($token);
 		return false;
+	}
+	if (!($data === null)) {
+		$data = $rows[0]['data'];
 	}
 
 	return true;
