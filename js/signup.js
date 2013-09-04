@@ -1,27 +1,35 @@
-function invalidUsername(uname) {
+function validUsername(uname) {
 	var emailRegexStr = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 	return (emailRegexStr.test(uname)); 
 }
-function invalidPassword(pass) {
-	var passRegexStr = /^[a-zA-Z0-9\.,-\/#!$%\^&\*;:{}=\-_`~()]+$/g;
+function validPassword(pass) {
+	var passRegexStr = /^[a-zA-Z0-9\.,-\/#!$%\^&\*;:{}=\-_~()]+$/g;
 	var capsRegexStr = /[A-Z]/g;
-	var punctRegexStr = /[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g;
-	return !(passRegexStr.test(pass) && 
+	var punctRegexStr = /[\.,-\/#!$%\^&\*;:{}=\-_~()]/g;
+	return (passRegexStr.test(pass) && 
 		(pass.search(capsRegexStr)>=0) && 
 		(pass.search(punctRegexStr)>=0)); 
 }
+
+function hideAllMessages() {
+	$('.signup-invalid-token-msg').hide();
+	$('.signup-username-used-msg').hide();
+	$('.password-invalid-msg').hide();
+	$('.username-invalid-msg').hide();
+}
+
 $(document).ready(function () {
     $('#signup-form').submit(function () {
 	var inputs = $('#signup-form :input');
 	var inv_user=false;
 	var inv_pass=false;
-	if (invalidUsername(inputs[0].val())){
+	if (!validUsername(inputs[1].value)){
 		inv_user = true;
 		$('.username-invalid-msg').show();
 	} else {
 		$('.username-invalid-msg').hide();
 	}
-	if (invalidPassword(inputs[1].val())) {
+	if (!validPassword(inputs[2].value)) {
 		inv_pass = true;
 		$('.password-invalid-msg').show();
 	} else {
@@ -31,19 +39,33 @@ $(document).ready(function () {
 		return false;
 	}
 	$.post('/excel/signupverify.php'+'?ajax=true&'+window.location.search.substr(1), 
-		$('#login-form').serialize(), 
+		$('#signup-form').serialize(), 
 		function(data) {
 			var pdata = JSON.parse(data);
-			if (pdata.error != 0) {
-				$('#loginmotd').show();
+			hideAllMessages();
+			if (pdata.error != '') {
+				switch(pdata.error) {
+					case 't':
+						$('.signup-invalid-token-msg').show();
+						break;
+					case 'uu':
+						$('.signup-username-used-msg').show();
+						break;
+					case 'pu':
+						$('.password-invalid-msg').show();
+						$('.username-invalid-msg').show();
+						break;
+					case 'u':
+						$('.username-invalid-msg').show();
+						break;
+					case 'p':
+						$('.password-invalid-msg').show();
+						break;
+				}
 				return;
 			}
 		
-			if (pdata.redirect == '') {
-				window.location.assign('/excel/verifyEmail.php');
-			} else {
-				window.location.assign(pdata.redirect);
-			}
+			window.location.assign('/excel/emailverify.php');
 		});
 	return false;
     });

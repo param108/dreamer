@@ -1,38 +1,9 @@
 <?php
 include_once('php/tokens.php');
-$errorSeen = '';
-if (array_key_exists('error',$_GET)) {
-	$errorSeen = $_GET['error'];
-}
-
-$userUsed = false;
-$badUser = false;
-$badPass = false;
-$badToken = false;
-switch($errorSeen) {
-	case 'p':
-		$badPass = true;
-		break;
-	case 'pu':
-		$badPass = true;
-		$badUser = true;
-		break;
-	case 'u':
-		$badUser = true;
-		break;
-	case 't':
-		$badToken = true;
-		break;
-	case 'uu':
-		$userUsed = true;
-		break;
-}
-$csrf = generate_token(60);
 ?>
 <html>
 	<head>
 		<script src="js/jquery.js"></script>
-		<script src="js/signup.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/signup.css"/>
 	</head>
 	<body>
