@@ -17,7 +17,7 @@ function verification_template($username) {
 	'</head>'.
 	'<body>'.
 		'<div class="email-header"><a href="http://localhost/excel/login.php">Laghava.com</a></div>'.
-		'<div class="email-body"><b>Hi!</b>,<br> To verify your email on Laghava.com Just click <a href="http://localhost/excel/emailverify.php?id='.generate_verification_token($username).
+		'<div class="email-body"><b>Hi!</b>,<br> To verify your email on Laghava.com Just click <a href="http://localhost/excel/emailclicked.php?id='.generate_verification_token($username).
 		'">Here</a></div>'.
 	'</body>'.
 	'</html>';

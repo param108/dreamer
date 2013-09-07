@@ -1,6 +1,10 @@
 <?php
 include_once('php/tokens.php');
 $errorSeen = false;
+$email = false;
+if (array_key_exists('email',$_GET)) {
+	$email = true;
+}
 if (array_key_exists('error',$_GET)) {
 	$errorSeen = true;
 }
@@ -18,6 +22,7 @@ $csrf = generate_token(60);
 	</head>
 	<body>
 		<span id='loginmotd' <?=($errorSeen?"":"class='hidemotd'")?> >Error in username or password</span>
+		<span id='emailverified' <?=($email?"":"class='hidemotd'")?> >Congratulations! you have successfully verified your email! Please login to continue</span>
 		<form id='login-form' action="/excel/loginverify.php<?=(($redirectUrl == '')?'':'?redirect='.$redirectUrl)?>">
 			<div><input type='hidden' name='csrf' value='<?=$csrf?>'</div>
 			<div style="100%">
@@ -30,5 +35,6 @@ $csrf = generate_token(60);
 			<input type="submit" value="Submit">
 			</div>
 		</form>
+		New User? <a href="/excel/signup.php">Sign Up</a>
 	</body>
 </html>
