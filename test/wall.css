@@ -1,0 +1,76 @@
+.memories {
+	text-align: center;
+}
+.memory {
+	vertical-align: middle;	
+	width: 340px;
+	border: 1px solid black;
+	margin: 10px;
+	display: inline-block;
+}
+.memory-photo-img {
+	padding: 20px;
+	background-color: #ffeebc;
+}
+
+.memory-text {
+	width: 340px;
+}
+.memory-text-span {
+	padding: 2px;
+	width: 336px;
+}
+.memory-buttons {
+	width: 340px;
+	text-align:right;	
+}
+.memory-buttons-like {
+}
+.medium.memory {
+	vertical-align: middle;	
+	width: 490px;
+	border: 1px solid black;
+	margin: 10px
+}
+.medium .memory-photo-img {
+	padding: 20px;
+	background-color: #ffeebc;
+}
+
+.medium .memory-text {
+	width: 490px;
+}
+.medium .memory-text-span {
+	padding: 2px;
+	width: 486px;
+}
+.medium .memory-buttons {
+	width: 490px;
+	text-align:right;	
+}
+.medium .memory-buttons-like {
+}
+.large.memory {
+	vertical-align: middle;	
+	width: 640px;
+	border: 1px solid black;
+	margin: 10px
+}
+.large .memory-photo-img {
+	padding: 20px;
+	background-color: #ffeebc;
+}
+
+.large .memory-text {
+	width: 640px;
+}
+.large .memory-text-span {
+	padding: 2px;
+	width: 636px;
+}
+.large .memory-buttons {
+	width: 640px;
+	text-align:right;	
+}
+.large .memory-buttons-like {
+}
