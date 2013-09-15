@@ -12,7 +12,7 @@ $csrf = generate_token(60);
 		</div>
 		<div style="width:100%;">
 		Didnt get the email? fill below to send again!
-		<form id='send-email-form' action="/excel/sendemailagain.php">
+		<form id='send-email-form' action="sendemailagain.php">
 			<div><input type='hidden' name='csrf' value='<?=$csrf?>'</div>
 			<div style="width:100%;">
 			email: <input type="text" name='username'>

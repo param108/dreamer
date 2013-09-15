@@ -28,6 +28,7 @@ function user_exists($username, $password, &$verified = null) {
 	if ((!$row) || (count($row) == 0)) {
 		return false;
 	}
+	error_log("USER FOUND:".var_export($row,true));
 	$verified = $row[0]['verified'];
 	return $row[0]['id'];
 }

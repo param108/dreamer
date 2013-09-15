@@ -5,11 +5,11 @@ include_once('php/email.php');
 $csrf = $_POST['csrf'];
 if (!verify_token($csrf)) {
 	error_log("Failed to verify token");
-	header('location: /excel/emailverify.php');
+	header('location: emailverify.php');
 	die();
 }
 
 delete_token($csrf);
 $username = $_POST['username'];
 send_verification_email($username);
-header('location: /excel/emailverify.php');
+header('location: emailverify.php');

@@ -7,14 +7,13 @@ function addNewRoleCb(id,text) {
 }
 function addNewRole() {
 	var newRole = $("#dream-text").val();
-
-	if (typeof addNewRole.nextId == "undefined") {
-		addNewRole.nextId = 0;
-	}
-
-	var newRoleId = ++addNewRole.nextId;
-	// fire an Ajax and on response add
-	addNewRoleCb(newRoleId, newRole);
+	$.post("ajax/addRole.php", { name: newRole}, function (data) {
+		var out = $.parseJSON(data);
+		if (out.e != 1) {
+			$("#dream-text").val('');
+			$.post("ajax/getRoles.php", renderList);
+		}
+	});
 	return false;
 }
 
@@ -44,16 +43,18 @@ function createSphereList(l) {
 
 function organizeList(l) {
 	var n = createSphereList(l);
-	var lenby2 = n.length/2;
+	// We will always keep a single at the end.
+	var lenby2 = (n.length - 1)/2;
 	var f = [];	
 	var oldi = 0;
 	var i = 0;
 	var sum = 0;
+	var br = [{'name':'<br>'}];
 	for (i = 1;;i+=2) {
 		var t = n.slice(oldi,oldi+i);
-		f = f.concat(createSphereList(t),[{role: '<br>'}]);
+		f = f.concat(createSphereList(t),br);
 		oldi = oldi + i;
-		if (oldi > lenby2) {
+		if (oldi >= lenby2) {
 			break;
 		}
 	}	
@@ -66,7 +67,7 @@ function organizeList(l) {
 			end = n.length - 1;
 		}
 		var t = n.slice(oldi,end);
-		f = f.concat(createSphereList(t),[{role:'<br>'}]);
+		f = f.concat(createSphereList(t),br);
 		oldi = oldi + i;
 		if (oldi >= n.length - 1) {
 			break;
@@ -76,11 +77,17 @@ function organizeList(l) {
 	return f;
 }
 function renderList(l) {
+	if (typeof l == "string") {
+		l = $.parseJSON(l);
+	}
 	var spherlist = organizeList(l);
+	if (spherlist) {
+			$('#sortable').empty();
+	}
 	for (var i = 0; i < spherlist.length; i++) {
 		var role = spherlist[i];
-		if (role.role != '<br>') {
-			$('#sortable').append('<li class="ui-state-default">'+role.role+'</li>');
+		if (role.name != '<br>') {
+			$('#sortable').append('<li class="ui-state-default" roleid="'+role.roleid+'">'+role.name+'<img class="ul-x-btn" src="img/x.png"/></li>');
 		} else {
 			$('#sortable').append('<br>');
 		}
@@ -88,7 +95,7 @@ function renderList(l) {
 }
 $(document).ready(function() {
 	$("#add-role-form").submit(addNewRole);	
-	$.post("excel/ajax/getRoles.php", renderList);
+	$.post("ajax/getRoles.php", renderList);
 	//var rolesList = [{t_elapsed: 10, role: 'Father'},
 	//		{t_elapsed: 1, role: 'Gamer'},
 	//		{t_elapsed: 19, role: 'Artist'},

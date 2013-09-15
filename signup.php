@@ -40,7 +40,7 @@ $csrf = generate_token(60);
 			<span class="signup-invalid-token-msg <?=(($badToken)?'':'hideit')?>" >I am sorry your token expired</span>
 			<span class="signup-username-used-msg <?=(($userUsed)?'':'hideit')?>" >I am sorry that username is already used</span>
 		</div>
-		<form id='signup-form' action="/excel/signupverify.php">
+		<form id='signup-form' action="signupverify.php">
 			<div><input type='hidden' name='csrf' value='<?=$csrf?>'</div>
 			<div style="width:100%;">
 			Username <input type="text" name='username'>

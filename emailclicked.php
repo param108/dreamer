@@ -8,7 +8,7 @@ if (verify_token($id, $data)) {
 	$data = json_decode($data,true);
 	set_email_verified($data['email']);
 	delete_token($id);
-	header('location: /excel/login.php?email=true');
+	header('location: login.php?email=true');
 	die();
 } else {
 	$csrf = generate_token(60);
@@ -22,8 +22,8 @@ if (verify_token($id, $data)) {
 			Your token Expired ! (its only valid for an hour!)
 		</div>
 		<div style="width:100%;">
-		Fill below to send email again! If you have already verified your email just click<a href="/excel/login.php">here</a> to login
-		<form id='send-email-form' action="/excel/sendemailagain.php">
+		Fill below to send email again! If you have already verified your email just click<a href="login.php">here</a> to login
+		<form id='send-email-form' action="sendemailagain.php">
 			<div><input type='hidden' name='csrf' value='<?=$csrf?>'</div>
 			<div style="width:100%;">
 			email: <input type="text" name='username'>

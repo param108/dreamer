@@ -1,0 +1,18 @@
+
+ul { list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px; }
+li { margin: 5px; padding: 5px; display: inline-block; border:2px blue solid;}
+
+#add-role-form {
+	width:70%;
+	margin:auto;
+	text-align:center;
+}
+#dream-roles {
+	width:70%;
+	margin:auto;
+	text-align:center;
+}
+
+.ul-x-btn {
+	margin-left: 10px;
+}

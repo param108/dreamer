@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#login-form').submit(function () {
-	$.post('/excel/loginverify.php'+'?ajax=true&'+window.location.search.substr(1), 
+	$.post('loginverify.php'+'?ajax=true&'+window.location.search.substr(1), 
 		$('#login-form').serialize(), 
 		function(data) {
 			var pdata = JSON.parse(data);
@@ -10,7 +10,7 @@ $(document).ready(function () {
 			}
 		
 			if (pdata.redirect == '') {
-				window.location.assign('/excel/home.php');
+				window.location.assign('home.php');
 			} else {
 				window.location.assign(pdata.redirect);
 			}

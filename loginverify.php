@@ -53,14 +53,14 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 $verified = false;
 $id = user_exists($username, $password, $verified);
-if (!($id === false)) {
+if ($id === false) {
 	error_log("Failed to find user");
 	return redirect_to_login();	
 } 
 
 if (!$verified) {
-	error_log("Failed to find user");
-	$redirectUrl = 'excel/emailverify.php';
+	error_log("User email not verified");
+	$redirectUrl = 'emailverify.php';
 	return redirect_to_home();	
 }
 # found the user now update the session
