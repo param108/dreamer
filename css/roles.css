@@ -7,6 +7,10 @@ li { margin: 5px; padding: 5px; display: inline-block; border:2px blue solid;}
 	margin:auto;
 	text-align:center;
 }
+
+.dream-add-btn {
+	display:none;
+}
 #dream-roles {
 	width:70%;
 	margin:auto;

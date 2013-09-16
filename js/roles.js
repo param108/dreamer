@@ -76,10 +76,12 @@ function organizeList(l) {
 	f.push(n[n.length - 1]);
 	return f;
 }
+var _RoleData;
 function renderList(l) {
 	if (typeof l == "string") {
 		l = $.parseJSON(l);
 	}
+	_RoleData = l;
 	var spherlist = organizeList(l);
 	if (spherlist) {
 			$('#sortable').empty();
@@ -93,8 +95,40 @@ function renderList(l) {
 		}
 	}
 }
+
+function isalpha(c) {
+	return (((c >= 97) && (c <= 122)) || ((c >= 65) && (c <= 90)));
+}
+
+function isdigit(c) {
+	return ((c >= 48) && (c <= 57));
+}
+
+function isalnum(c) {
+	return (isalpha(c) || isdigit(c));
+}
+
+// r is a regexp
+function unmatchedRoles(r) {
+	var result = [];
+	for (var i = 0; i< _RoleData.length;i++) {
+		if (!r.test(_RoleData[i].name)) {
+			$('li[roleid="'+_RoleData[i].roleid+'"]').hide();	
+		} else {
+			$('li[roleid="'+_RoleData[i].roleid+'"]').show();	
+		}	
+	}
+}
+
+function searchRole(event) {
+	var word=$('#dream-text').val();
+	var r = new RegExp(word,'i');	
+	unmatchedRoles(r);
+}
+
 $(document).ready(function() {
 	$("#add-role-form").submit(addNewRole);	
+	$('#dream-text').keyup(searchRole);
 	$.post("ajax/getRoles.php", renderList);
 	//var rolesList = [{t_elapsed: 10, role: 'Father'},
 	//		{t_elapsed: 1, role: 'Gamer'},

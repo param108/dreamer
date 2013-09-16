@@ -14,7 +14,7 @@ include_once('header.php');
 
 <form id="add-role-form"> 
 	<input id="dream-text" type=text name="dreamText"/>
-	<input type=submit value="Add"/>
+	<input class="dream-add-btn" type=submit value="add"/>
 </form> 
 
 <div id="dream-roles">
