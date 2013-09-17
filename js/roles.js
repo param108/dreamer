@@ -1,10 +1,3 @@
-function addNewRoleUpdate(event, ui) {
-	console.log(event);
-	console.log(ui);
-}
-function addNewRoleCb(id,text) {
-	$('#sortable').append('<li class="ui-state-highlighted" dreamid="'+id+'">'+text+'</li>');
-}
 function addNewRole() {
 	var newRole = $("#dream-text").val();
 	$.post("ajax/addRole.php", { name: newRole}, function (data) {
@@ -17,6 +10,33 @@ function addNewRole() {
 	return false;
 }
 
+// Presently the delete button next to search does nothing
+function deleteRole() {
+	return false;
+}
+
+// If there is only one selected choose it
+function selectRole() {
+	var word=$('#dream-text').val();
+	var found = null;
+	var foundsofar = 0;
+	var r = new RegExp(word,'i');	
+	for (var i = 0; i< _RoleData.length;i++) {
+		if (r.test(_RoleData[i].name)) {
+			if (!foundsofar) {
+				found = $('li[roleid="'+_RoleData[i].roleid+'"]').find("a");	
+				foundsofar++;
+			} else {
+				return false;
+			}
+		}	
+	}
+
+	if (found !== null) {
+		found.click();
+	}
+	return false;
+}
 // sort the roles on time-elapsed descending
 function sortRoles(a,b) {
 	return a.t_elapsed - b.t_elapsed;	
@@ -89,7 +109,13 @@ function renderList(l) {
 	for (var i = 0; i < spherlist.length; i++) {
 		var role = spherlist[i];
 		if (role.name != '<br>') {
-			$('#sortable').append('<li class="ui-state-default" roleid="'+role.roleid+'">'+role.name+'<img class="ul-x-btn" src="img/x.png"/></li>');
+			if ($('#sortable-delete').length > 0) {
+				$('#sortable-delete').append('<li class="ui-state-default" roleid="'+role.roleid+'"><a class="rolebtn">'+role.name+'<img class="ul-x-btn" src="img/x.png"/></a></li>');
+			} else if ($('#sortable-select').length > 0) {
+				$('#sortable-select').append('<li class="ui-state-default" roleid="'+role.roleid+'"><a class="rolebtn">'+role.name+'</a></li>');
+			} else if ($('#sortable-add').length > 0) {
+				$('#sortable-select').append('<li class="ui-state-default" roleid="'+role.roleid+'">'+role.name+'</li>');
+			}
 		} else {
 			$('#sortable').append('<br>');
 		}
@@ -126,8 +152,35 @@ function searchRole(event) {
 	unmatchedRoles(r);
 }
 
+function selectRoleBtnClicked(event) {
+	var me = $(event.target);
+	var roleid = me.attr('roleid');
+	// in progress FIXME
+	$.post("ajax/role.php", { name: newRole}, function (data) {
+		var out = $.parseJSON(data);
+		if (out.e != 1) {
+			$("#dream-text").val('');
+			$.post("ajax/getRoles.php", renderList);
+		}
+	});
+	return false;
+
+}
+
 $(document).ready(function() {
-	$("#add-role-form").submit(addNewRole);	
+	if ($('#sortable-add').length > 0) {
+		$('.dream-btn').val('Add');
+		$("#role-form").submit(addNewRole);	
+	} else if ($('#sortable-delete').length > 0) {
+		$('.dream-btn').val('Delete');
+		$('.dream-btn').hide();
+		$("#role-form").submit(deleteRole);	
+		$(".rolebtn").submit(deleteRoleBtnClicked);	
+	} else if ($('#sortable-select').length > 0) {
+		$('.dream-btn').val('Select');
+		$("#role-form").submit(selectRole);	
+		$(".rolebtn").submit(selectRoleBtnClicked);	
+	}
 	$('#dream-text').keyup(searchRole);
 	$.post("ajax/getRoles.php", renderList);
 	//var rolesList = [{t_elapsed: 10, role: 'Father'},

@@ -14,10 +14,11 @@ include_once('header.php');
 
 <form id="role-form"> 
 	<input id="dream-text" type=text name="dreamText"/>
+	<input id="dream-btn" type=submit />
 </form> 
 
 <div id="dream-roles">
-	<ul id="sortable-select">
+	<ul id="sortable-add">
 	</ul>
 </div> 
  
