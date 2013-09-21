@@ -113,11 +113,15 @@ function renderList(l) {
 				$('#sortable-delete').append('<li class="ui-state-default" roleid="'+role.roleid+'"><a class="rolebtn">'+role.name+'<img class="ul-x-btn" src="img/x.png"/></a></li>');
 			} else if ($('#sortable-select').length > 0) {
 				$('#sortable-select').append('<li class="ui-state-default" roleid="'+role.roleid+'"><a class="rolebtn">'+role.name+'</a></li>');
+				$(".rolebtn").unbind("click");
+				$(".rolebtn").click(selectRoleBtnClicked);
 			} else if ($('#sortable-add').length > 0) {
-				$('#sortable-select').append('<li class="ui-state-default" roleid="'+role.roleid+'">'+role.name+'</li>');
+				$('#sortable-add').append('<li class="ui-state-default" roleid="'+role.roleid+'">'+role.name+'</li>');
 			}
 		} else {
-			$('#sortable').append('<br>');
+			$('#sortable-delete').append('<br>');
+			$('#sortable-select').append('<br>');
+			$('#sortable-add').append('<br>');
 		}
 	}
 }
@@ -153,18 +157,11 @@ function searchRole(event) {
 }
 
 function selectRoleBtnClicked(event) {
-	var me = $(event.target);
-	var roleid = me.attr('roleid');
-	// in progress FIXME
-	$.post("ajax/role.php", { name: newRole}, function (data) {
-		var out = $.parseJSON(data);
-		if (out.e != 1) {
-			$("#dream-text").val('');
-			$.post("ajax/getRoles.php", renderList);
-		}
-	});
+	var target = event.target;
+	var roleid = $(target).parent().attr('roleid');
+	var url="role.php?roleid="+roleid;
+	window.location.assign(url);
 	return false;
-
 }
 
 $(document).ready(function() {
@@ -175,11 +172,11 @@ $(document).ready(function() {
 		$('.dream-btn').val('Delete');
 		$('.dream-btn').hide();
 		$("#role-form").submit(deleteRole);	
-		$(".rolebtn").submit(deleteRoleBtnClicked);	
+		$(".rolebtn").click(deleteRoleBtnClicked);	
 	} else if ($('#sortable-select').length > 0) {
 		$('.dream-btn').val('Select');
 		$("#role-form").submit(selectRole);	
-		$(".rolebtn").submit(selectRoleBtnClicked);	
+		$(".rolebtn").click(selectRoleBtnClicked);	
 	}
 	$('#dream-text').keyup(searchRole);
 	$.post("ajax/getRoles.php", renderList);
