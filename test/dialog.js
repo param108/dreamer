@@ -1,6 +1,6 @@
 function createDialog(text, callback, btnok=true, btncancel=true) {
 	$('body').append('<div class="modaldialogbk"></div>');	
-	$(".modaldialogbk").append($('<div class="modaldialog"></div>'));
+	$('body').append($('<div class="modaldialog"></div>'));
 	$(".modaldialog").append($('<div class="modaldialogtext"><p>'+text+'</p></div>'));
 
 	var bkgd = $(".modaldialogbk");
@@ -9,5 +9,6 @@ function createDialog(text, callback, btnok=true, btncancel=true) {
 	bkgd.click(function(event) {
 			event.stopPropagation(); 
 	});
+	$(".modaldialogtext").fadeIn();
 }
 
