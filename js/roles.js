@@ -12,6 +12,24 @@ function addNewRole() {
 
 // Presently the delete button next to search does nothing
 function deleteRole() {
+	var word=$('#dream-text').val();
+	var found = null;
+	var foundsofar = 0;
+	var r = new RegExp(word,'i');	
+	for (var i = 0; i< _RoleData.length;i++) {
+		if (r.test(_RoleData[i].name)) {
+			if (!foundsofar) {
+				found = $('li[roleid="'+_RoleData[i].roleid+'"]').find("a");	
+				foundsofar++;
+			} else {
+				return false;
+			}
+		}	
+	}
+
+	if (found !== null) {
+		found.click();
+	}
 	return false;
 }
 
@@ -106,23 +124,47 @@ function renderList(l) {
 	if (spherlist) {
 			$('#sortable').empty();
 	}
+	var pageType="delete";
+	if ($('#sortable-delete').length > 0) {
+				pageType = "delete";
+	} else if ($('#sortable-select').length > 0) {
+				pageType = "select";
+	} else if ($('#sortable-add').length > 0) {
+				pageType = "add";
+	}
+	
 	for (var i = 0; i < spherlist.length; i++) {
 		var role = spherlist[i];
 		if (role.name != '<br>') {
-			if ($('#sortable-delete').length > 0) {
+			switch (pageType) {
+				case 'delete':
 				$('#sortable-delete').append('<li class="ui-state-default" roleid="'+role.roleid+'"><a class="rolebtn">'+role.name+'<img class="ul-x-btn" src="img/x.png"/></a></li>');
-			} else if ($('#sortable-select').length > 0) {
+				break;
+				case 'select':	
 				$('#sortable-select').append('<li class="ui-state-default" roleid="'+role.roleid+'"><a class="rolebtn">'+role.name+'</a></li>');
-				$(".rolebtn").unbind("click");
-				$(".rolebtn").click(selectRoleBtnClicked);
-			} else if ($('#sortable-add').length > 0) {
+				break;
+				case 'add':
 				$('#sortable-add').append('<li class="ui-state-default" roleid="'+role.roleid+'">'+role.name+'</li>');
+				break;
 			}
 		} else {
 			$('#sortable-delete').append('<br>');
 			$('#sortable-select').append('<br>');
 			$('#sortable-add').append('<br>');
 		}
+	}
+
+	switch (pageType) {
+		case "delete":
+			$(".rolebtn").unbind("click");
+			$(".rolebtn").click(deleteRoleBtnClicked);
+		break;
+		case "select":
+			$(".rolebtn").unbind("click");
+			$(".rolebtn").click(selectRoleBtnClicked);
+		break;
+		case "add":
+		break;
 	}
 }
 
@@ -161,6 +203,19 @@ function selectRoleBtnClicked(event) {
 	var roleid = $(target).parent().attr('roleid');
 	var url="role.php?roleid="+roleid;
 	window.location.assign(url);
+	return false;
+}
+
+function deleteRoleBtnClicked(event) {
+	var target = event.target;
+	var roleid = $(target).parent().attr('roleid');
+	$.post("ajax/deleteRole.php", { roleid: roleid}, function (data) {
+		var out = $.parseJSON(data);
+		if (out.e != 1) {
+			$("#dream-text").val('');
+			$.post("ajax/getRoles.php", renderList);
+		}
+	});
 	return false;
 }
 
