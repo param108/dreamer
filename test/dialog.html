@@ -1,0 +1,20 @@
+<html>
+<head>
+  <script src="../js/jquery.js"></script>
+  <script src="dialog.js"></script>
+  <link rel="stylesheet" href="dialog.css" />
+  <script>
+	$(document).ready(function() {
+		createDialog("To create a beautiful painting one must begin with an empty canvas");	
+		$('#screen').click(function () { console.log("Hit screen");});
+	});
+  </script>
+</head>
+<body>
+	<div id="screen">
+		<span style="text-align:center; margin-top: 40px;">
+		This is the background;
+		</span>
+	</div>
+</body>
+</html>
