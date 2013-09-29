@@ -1,6 +1,49 @@
 #memories {
 	text-align: center;
+	margin-top: 40px;
 }
+
+#badges-tab {
+	vertical-align: middle;
+	background-color: #ffeebc;
+	position: fixed;
+	height: 70%;
+	top: 15%;
+	left: 0;
+	width: 40px;
+	opacity: 0.7;
+}
+#badges {
+	vertical-align: middle;
+	background-color: #ffeebc;
+	position: fixed;
+	height: 70%;
+	top: 15%;
+	left: -70%;
+	width: 70%;
+}
+
+#quests-tab {
+	vertical-align: middle;
+	height: 40px;
+	background-color: #ffeebc;
+	position: fixed;
+	width: 70%;
+	margin-left: 15%;
+	top: 0px;
+	opacity: 0.7;
+}
+
+#quests {
+	vertical-align: middle;
+	height: 70%;
+	background-color: #ffeebc;
+	position: fixed;
+	width: 70%;
+	margin-left: 15%;
+	top: -70%;
+}
+
 .memory {
 	vertical-align: middle;	
 	width: 340px;

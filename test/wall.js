@@ -29,11 +29,49 @@ function createMemoryLayout(data, p) {
 	}
 }
 
+function moveBadgesTabLeft() {
+	console.log("left");
+	$('#badges').animate({left: "-70%"},400, "swing",
+		function () {
+			$('#badges').unbind('click');
+			$('#badges-tab').click(moveBadgesTabRight);
+		}
+	);
+}
+function moveBadgesTabRight() {
+	console.log("right");
+	$('#badges').animate({left: "0px"},400, "swing",
+		function () {
+			$('#badges-tab').unbind('click');
+			$('#badges').click(moveBadgesTabLeft);
+		}
+	);
+}
+function moveQuestsTabUp() {
+	console.log("left");
+	$('#quests').animate({top: "-70%"},400, "swing",
+		function () {
+			$('#quests').unbind('click');
+			$('#quests-tab').click(moveQuestsTabDown);
+		}
+	);
+}
+function moveQuestsTabDown() {
+	console.log("right");
+	$('#quests').animate({top: "0px"},400, "swing",
+		function () {
+			$('#quests-tab').unbind('click');
+			$('#quests').click(moveQuestsTabUp);
+		}
+	);
+}
+
+
 $(document).ready(function() {
 
 	// data will be formatted as
 	// { futureId, size, photo, text } 
-	/*var sampleData = [{ 
+	var sampleData = [{ 
 				futureId: 1,
 				size: 'medium',
 				photo: '450x450.png',
@@ -51,9 +89,14 @@ $(document).ready(function() {
 				photo: '600x600.png',
 				text: 'This one is when I was creating the website'
 			}
-	];*/
-	$.post("ajax/getFutures.php", function(data) {
+	];
+	createMemoryLayout(sampleData,$('#memories'));
+	/*$.post("ajax/getFutures.php", function(data) {
 			var memdata = $.parseJSON(data);
 			createMemoryLayout(memdata,$('#memories'));
-	}
+	}*/
+
+
+	$('#badges-tab').click(moveBadgesTabRight);
+	$('#quests-tab').click(moveQuestsTabDown);
 })
