@@ -1,7 +1,7 @@
 .modaldialog {
+	display: none;
 	position: absolute;
 	width: 70%;
-	height: 70%;
 	left: 15%;
 	top: 15%;
 	background-color: #000034;
@@ -9,17 +9,40 @@
 	border-radius: 30px;
 	background-image: url('crepe.png');
 	box-shadow: 10px 10px 5px;
+	z-index: 1;
 }
 
 .modaldialogtext {
 	display: none;
 	position: relative;
 	width: 70%;
-	height: 70%;
 	left: 15%;
 	top: 15%;
 	color: black;
 	text-align:center;
+	z-index: 1;
+}
+
+.modaldialogbtns {
+	text-align:center;
+	z-index: 1;
+}
+.modaldialogbtnsright {
+	text-align:right;
+	z-index: 1;
+}
+.modaldialogokbtn {
+	width: 60px;
+	height: 30px;
+	margin: 10px;
+	border-radius: 10px;
+	background-image: url('buttonbg.png');
+}
+
+.modaldialogcancelbtn {
+	margin: 10px;
+	border-radius: 10px;
+	background-image: url('buttonbg.png');
 }
 
 .modaldialogbk {
@@ -30,6 +53,8 @@
 	height: 100%;
 	background-color: black;
 	opacity: 0;
+	display: none;
+	z-index: 0;
 }
 
 body {

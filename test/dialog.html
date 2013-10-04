@@ -5,8 +5,10 @@
   <link rel="stylesheet" href="dialog.css" />
   <script>
 	$(document).ready(function() {
+		createDialog("To create a beautiful painting one must begin with an empty canvas", true, true, true);	
 		$('#screen').click(function () { 
-			createDialog("To create a beautiful painting one must begin with an empty canvas");	
+			console.log("screen clicked");
+			showDialog();
 		});
 	});
   </script>
