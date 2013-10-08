@@ -38,7 +38,7 @@ $(document).ready(function () {
 	if (inv_user || inv_pass) {
 		return false;
 	}
-	$.post('/excel/signupverify.php'+'?ajax=true&'+window.location.search.substr(1), 
+	$.post('signupverify.php'+'?ajax=true&'+window.location.search.substr(1), 
 		$('#signup-form').serialize(), 
 		function(data) {
 			var pdata = JSON.parse(data);
@@ -65,7 +65,7 @@ $(document).ready(function () {
 				return;
 			}
 		
-			window.location.assign('/excel/emailverify.php');
+			window.location.assign('emailverify.php');
 		});
 	return false;
     });
