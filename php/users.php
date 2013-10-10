@@ -7,7 +7,7 @@ include_once('dbm.class.php');
 function create_user($username,$password)
 {
 	$dbpassword = sha1($password);
-	$dbh = new dbm(DBHOST,'excel',DBUSER,DBPASS);
+	$dbh = new dbm(DBHOST,DBMAIN,DBUSER,DBPASS);
 	$stmt = $dbh->m_dbh->prepare("insert into users values (:username,:password, DEFAULT, false);");
 	$created = time();
 	if (!$stmt->execute(array(':username'=>$username,':password'=>$dbpassword))) {
@@ -21,7 +21,7 @@ function create_user($username,$password)
 
 function user_exists($username, $password, &$verified = null) {
 	$dbpassword = sha1($password);
-	$dbh = new dbm(DBHOST,"excel",DBUSER,DBPASS);
+	$dbh = new dbm(DBHOST,DBMAIN,DBUSER,DBPASS);
 	$stmt = $dbh->m_dbh->prepare("select * from users where email =:username and password=:password;",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 	$stmt->execute(array(':username' => $username, ':password' => $dbpassword));
 	$row = $stmt->fetchall(PDO::FETCH_ASSOC);
@@ -34,7 +34,7 @@ function user_exists($username, $password, &$verified = null) {
 }
 
 function user_exists_nopasswd($username, &$verified = null) {
-	$dbh = new dbm(DBHOST,"excel",DBUSER,DBPASS);
+	$dbh = new dbm(DBHOST,DBMAIN,DBUSER,DBPASS);
 	$stmt = $dbh->m_dbh->prepare("select * from users where email =:username;",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 	$stmt->execute(array(':username' => $username));
 	$row = $stmt->fetchall(PDO::FETCH_ASSOC);

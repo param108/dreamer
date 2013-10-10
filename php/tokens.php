@@ -14,7 +14,7 @@ function getToken($length){
 }
 function generate_token($life=60,$data="{}") {
 	$token =  getToken(30);
-	$dbh = new dbm(DBHOST,'excel',DBUSER,DBPASS);
+	$dbh = new dbm(DBHOST,DBMAIN,DBUSER,DBPASS);
 	$stmt = $dbh->m_dbh->prepare("insert into user_session values (:token,:expiry,:data,FROM_UNIXTIME(:created));");
 	$created = time();
 	if (!$stmt->execute(array(':token'=>$token,':expiry'=>$life,':data'=>$data, ':created'=>$created))) {
@@ -26,7 +26,7 @@ function generate_token($life=60,$data="{}") {
 	return $token;
 }
 function delete_token($token) {
-	$dbh = new dbm(DBHOST,'excel',DBUSER,DBPASS);
+	$dbh = new dbm(DBHOST,DBMAIN,DBUSER,DBPASS);
 	$stmt = $dbh->m_dbh->prepare("delete from user_session where session_key=:token;");
 	if (!$stmt->execute(array(':token'=>$token))) {
 		print_r($stmt->errorInfo());
@@ -37,7 +37,7 @@ function delete_token($token) {
 	return true;
 }
 function verify_token($token,&$data = null) {
-	$dbh = new dbm(DBHOST,'excel',DBUSER,DBPASS);
+	$dbh = new dbm(DBHOST,DBMAIN,DBUSER,DBPASS);
 	$stmt = $dbh->m_dbh->prepare("select UNIX_TIMESTAMP(created),expiry,data from user_session where session_key=:token;");
 	if (!$stmt->execute(array(':token'=>$token))) {
 		error_log("verify_token sql failed");
@@ -62,7 +62,7 @@ function verify_token($token,&$data = null) {
 }
 
 function reset_token($token) {
-	$dbh = new dbm(DBHOST,'excel',DBUSER,DBPASS);
+	$dbh = new dbm(DBHOST,DBMAIN,DBUSER,DBPASS);
 	$stmt = $dbh->m_dbh->prepare("update user_session set created=FROM_UNIXTIME(:created) where session_key=:token;");
 	$created = time();
 	if (!$stmt->execute(array(':token'=>"$token",':created'=>"$created"))) {
@@ -73,7 +73,7 @@ function reset_token($token) {
 	return true;
 }
 function dump_token($token) {
-	$dbh = new dbm(DBHOST,'excel',DBUSER,DBPASS);
+	$dbh = new dbm(DBHOST,DBMAIN,DBUSER,DBPASS);
 	$stmt = $dbh->m_dbh->prepare("select * from user_session where session_key=:token;");
 	if (!$stmt->execute(array(':token'=>$token))) {
 		error_log("verify_token sql failed");

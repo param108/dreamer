@@ -36,7 +36,7 @@ function send_verification_email($username) {
 }
 
 function set_email_verified($username) {
-	$dbh = new dbm(DBHOST,'excel',DBUSER,DBPASS);
+	$dbh = new dbm(DBHOST,DBMAIN,DBUSER,DBPASS);
 	$stmt = $dbh->m_dbh->prepare("update users set verified = true where email=:username ;");
 	if (!$stmt->execute(array(':username' => $username))) {
 		print_r($stmt->errorInfo());

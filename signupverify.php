@@ -138,7 +138,7 @@ if (!$userValid) {
 	}
 }
 # now check the db if the user exists
-$dbh = new dbm(DBHOST,"excel",DBUSER,DBPASS);
+$dbh = new dbm(DBHOST,DBMAIN,DBUSER,DBPASS);
 $stmt = $dbh->m_dbh->prepare("select * from users where email = :username ",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $stmt->execute(array(':username' => $username));
 $row = $stmt->fetchall(PDO::FETCH_ASSOC);

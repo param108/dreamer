@@ -8,7 +8,7 @@ $name = $_POST['name'];
 $id = $DREAMER_DATA['u'];
 
 $ret = array('e' => 0);
-$dbh = new dbm(DBHOST,'excel', DBUSER, DBPASS);
+$dbh = new dbm(DBHOST,DBMAIN, DBUSER, DBPASS);
 $stmt = $dbh->m_dbh->prepare("insert into roles values(:uid,DEFAULT,:name,NOW());",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 if (!$stmt->execute(array(':uid' => $id, ':name' => $name))) {
 		print_r($stmt->errorInfo());

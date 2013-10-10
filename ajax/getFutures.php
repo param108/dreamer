@@ -7,7 +7,7 @@ include_once('../header.php');
 $id = $DREAMER_DATA['u'];
 
 
-$dbh = new dbm(DBHOST,'excel', DBUSER, DBPASS);
+$dbh = new dbm(DBHOST,DBMAIN, DBUSER, DBPASS);
 $stmt = $dbh->m_dbh->prepare("select memoryId, size, photo, text from futures where uid =:id;",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $stmt->execute(array(':id' => $id));
 $row = $stmt->fetchall(PDO::FETCH_ASSOC);
