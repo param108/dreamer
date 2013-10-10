@@ -13,11 +13,11 @@ function generate_verification_token($username) {
 function verification_template($username) { 
 	$ver = '<html>'.
 	'<head>'.
-		'<link rel="stylesheet" type="text/css" href="http://localhost/excel/css/verification_email.css"/>'.
+		'<link rel="stylesheet" type="text/css" href="'.MAINURL.'/css/verification_email.css"/>'.
 	'</head>'.
 	'<body>'.
-		'<div class="email-header"><a href="http://localhost/excel/login.php">Laghava.com</a></div>'.
-		'<div class="email-body"><b>Hi!</b>,<br> To verify your email on Laghava.com Just click <a href="http://localhost/excel/emailclicked.php?id='.generate_verification_token($username).
+		'<div class="email-header"><a href="'.MAINURL.'/login.php">Laghava.com</a></div>'.
+		'<div class="email-body"><b>Hi!</b>,<br> To verify your email on Laghava.com Just click <a href="'.MAINURL.'/emailclicked.php?id='.generate_verification_token($username).
 		'">Here</a></div>'.
 	'</body>'.
 	'</html>';
