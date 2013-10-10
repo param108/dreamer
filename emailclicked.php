@@ -3,7 +3,7 @@ include_once('php/tokens.php');
 include_once('php/email.php');
 include_once('php/users.php');
 $data = "junk";
-$id = $_POST['id'];
+$id = $_GET['id'];
 if (verify_token($id, $data)) {
 	$data = json_decode($data,true);
 	set_email_verified($data['email']);
