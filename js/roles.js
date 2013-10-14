@@ -133,7 +133,11 @@ function roleExists(word) {
 
 function renderList(l) {
 	if (typeof l == "string") {
-		l = $.parseJSON(l);
+		if (l != '') {
+			l = $.parseJSON(l);
+		} else {
+			return;
+		}
 	}
 	_RoleData = l;
 	var spherlist = organizeList(l);
