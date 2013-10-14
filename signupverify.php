@@ -152,7 +152,6 @@ if (!$passValid) {
 	redirect_to_signup('p');
 }
 
-$password = sha1($password);
 create_user($username, $password);
 #send the verification mail
 send_verification_email($username);
