@@ -136,6 +136,7 @@ function renderList(l) {
 		if (l != '') {
 			l = $.parseJSON(l);
 		} else {
+			_RoleData = [];
 			return;
 		}
 	}
