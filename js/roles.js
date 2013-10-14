@@ -1,16 +1,21 @@
 function addNewRole() {
 	var newRole = $("#dream-text").val();
-	$.post("ajax/addRole.php", { name: newRole}, function (data) {
-		var out = $.parseJSON(data);
-		if (out.e != 1) {
-			$("#dream-text").val('');
-			$.post("ajax/getRoles.php", renderList);
-		}
-	});
+	if (!roleExists(newRole)) {
+		$.post("ajax/addRole.php", { name: newRole}, function (data) {
+			var out = $.parseJSON(data);
+			if (out.e != 1) {
+				$("#dream-text").val('');
+				$.post("ajax/getRoles.php", renderList);
+			}
+		});
+	} else {
+		$("#dream-text").val('');
+		searchRole(null);
+		//FIXME add a dialog here
+	}
 	return false;
 }
 
-// Presently the delete button next to search does nothing
 function deleteRole() {
 	var word=$('#dream-text').val();
 	var found = null;
@@ -115,6 +120,17 @@ function organizeList(l) {
 	return f;
 }
 var _RoleData;
+
+function roleExists(word) {
+	var r = new RegExp(word,'i');	
+	for (var i = 0; i < _RoleData.length; i++) {
+		if (r.test(_RoleData[i].name)) {
+			return true;
+		}	
+	}	
+	return false;
+}
+
 function renderList(l) {
 	if (typeof l == "string") {
 		l = $.parseJSON(l);
@@ -122,7 +138,9 @@ function renderList(l) {
 	_RoleData = l;
 	var spherlist = organizeList(l);
 	if (spherlist) {
-			$('#sortable').empty();
+			$('#sortable-delete').empty();
+			$('#sortable-select').empty();
+			$('#sortable-add').empty();
 	}
 	var pageType="delete";
 	if ($('#sortable-delete').length > 0) {
@@ -158,6 +176,7 @@ function renderList(l) {
 		case "delete":
 			$(".rolebtn").unbind("click");
 			$(".rolebtn").click(deleteRoleBtnClicked);
+			$(".ul-x-btn").click(deleteRoleBtnClicked);
 		break;
 		case "select":
 			$(".rolebtn").unbind("click");

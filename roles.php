@@ -12,6 +12,10 @@ include_once('header.php');
   </head>
 <body>
 
+<div id="mod-btns">
+	<div id="delete-role-btn"><a href="deleteRoles.php">Delete Roles</a></div>
+	<div id="add-role-btn"> <a href="addRoles.php">Add Roles</a></div>
+</div>
 <form id="role-form"> 
 	<input id="dream-text" type=text name="dreamText"/>
 </form> 

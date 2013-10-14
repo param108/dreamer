@@ -11,12 +11,51 @@ li { margin: 5px; padding: 5px; display: inline-block; border:2px blue solid;}
 .dream-add-btn {
 	display:none;
 }
+
+#mod-btns {
+	width: 70%;
+	margin: auto;
+}
+
+/* Select roles button on the delete page*/
+#delete-select-role-btn {
+	width: 100%;
+	text-align: right;
+	margin-right: 5%;
+}
+
+/* Select roles button on the add page*/
+#add-select-role-btn {
+	width: 100%;
+	text-align: left;
+	margin-left: 5%;
+}
+
+
+#delete-role-btn {
+	width: 45%;
+	text-align: left;
+	display: inline-block;
+	margin-left: 5%;
+}
+
+#add-role-btn {
+	width: 45%;
+	text-align: right;
+	display: inline-block;
+}
+
 #dream-roles {
 	width:70%;
 	margin:auto;
 	text-align:center;
 }
 
+.rolebtn {
+	cursor:pointer;
+}
+
 .ul-x-btn {
-	margin-left: 10px;
+	padding-left: 5px;
+	cursor:pointer;
 }
