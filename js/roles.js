@@ -186,7 +186,7 @@ function renderList(l) {
 		case "delete":
 			$(".rolebtn").unbind("click");
 			$(".rolebtn").click(deleteRoleBtnClicked);
-			$(".ul-x-btn").click(deleteRoleBtnClicked);
+			$(".ul-x-btn").click(deleteRoleBtnXClicked);
 		break;
 		case "select":
 			$(".rolebtn").unbind("click");
@@ -232,6 +232,19 @@ function selectRoleBtnClicked(event) {
 	var roleid = $(target).parent().attr('roleid');
 	var url="role.php?roleid="+roleid;
 	window.location.assign(url);
+	return false;
+}
+
+function deleteRoleBtnXClicked(event) {
+	var target = event.target;
+	var roleid = $(target).parent().parent().attr('roleid');
+	$.post("ajax/deleteRole.php", { roleid: roleid}, function (data) {
+		var out = $.parseJSON(data);
+		if (out.e != 1) {
+			$("#dream-text").val('');
+			$.post("ajax/getRoles.php", renderList);
+		}
+	});
 	return false;
 }
 
