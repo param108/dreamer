@@ -1,13 +1,13 @@
 function addNewRole() {
 	var newRole = $("#dream-text").val();
-	if (!roleExists(newRole)) {
+	newRole = newRole.replace(/\s+/g, ' ');
+	newRole = newRole.replace(/^\s+|\s+$/g, '');
+	if (!((newRole == '')||(newRole == ' ')||(roleExists(newRole)))) {
 		$('.loader').show();
 		$.post("ajax/addRole.php", { name: newRole}, function (data) {
 			var out = $.parseJSON(data);
-			if (out.e != 1) {
-				$("#dream-text").val('');
-				$.post("ajax/getRoles.php", renderList);
-			}
+			$("#dream-text").val('');
+			$.post("ajax/getRoles.php", renderList);
 		});
 	} else {
 		$("#dream-text").val('');
@@ -128,9 +128,9 @@ function organizeList(l) {
 var _RoleData;
 
 function roleExists(word) {
-	var r = new RegExp(word,'i');	
+	var testWord = word.toLowerCase();
 	for (var i = 0; i < _RoleData.length; i++) {
-		if (r.test(_RoleData[i].name)) {
+		if (testWord == _RoleData[i].name.toLowerCase()) {
 			return true;
 		}	
 	}	
