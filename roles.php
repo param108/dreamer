@@ -17,7 +17,7 @@ include_once('header.php');
 	<div id="add-role-btn"> <a href="addRoles.php">Add Roles</a></div>
 </div>
 <form id="role-form"> 
-	<input id="dream-text" type=text name="dreamText"/>
+	<input id="dream-text" type=text name="dreamText"/><img class="loader" src="img/load.gif"></img>
 </form> 
 
 <div id="dream-roles">

@@ -1,6 +1,7 @@
 function addNewRole() {
 	var newRole = $("#dream-text").val();
 	if (!roleExists(newRole)) {
+		$('.loader').show();
 		$.post("ajax/addRole.php", { name: newRole}, function (data) {
 			var out = $.parseJSON(data);
 			if (out.e != 1) {
@@ -195,6 +196,7 @@ function renderList(l) {
 		case "add":
 		break;
 	}
+	$('.loader').hide();
 }
 
 function isalpha(c) {
@@ -238,6 +240,7 @@ function selectRoleBtnClicked(event) {
 function deleteRoleBtnXClicked(event) {
 	var target = event.target;
 	var roleid = $(target).parent().parent().attr('roleid');
+	$('.loader').show();
 	$.post("ajax/deleteRole.php", { roleid: roleid}, function (data) {
 		var out = $.parseJSON(data);
 		if (out.e != 1) {
@@ -251,6 +254,7 @@ function deleteRoleBtnXClicked(event) {
 function deleteRoleBtnClicked(event) {
 	var target = event.target;
 	var roleid = $(target).parent().attr('roleid');
+	$('.loader').show();
 	$.post("ajax/deleteRole.php", { roleid: roleid}, function (data) {
 		var out = $.parseJSON(data);
 		if (out.e != 1) {
@@ -276,6 +280,7 @@ $(document).ready(function() {
 		$(".rolebtn").click(selectRoleBtnClicked);	
 	}
 	$('#dream-text').keyup(searchRole);
+	$('.loader').show();
 	$.post("ajax/getRoles.php", renderList);
 	//var rolesList = [{t_elapsed: 10, role: 'Father'},
 	//		{t_elapsed: 1, role: 'Gamer'},

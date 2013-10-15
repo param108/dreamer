@@ -21,6 +21,7 @@ include_once('header.php');
 <form id="role-form"> 
 	<input id="dream-text" type=text name="dreamText"/>
 	<input id="dream-btn" type=submit value="Add"/>
+	<img class="loader" src="img/load.gif"></img>
 </form> 
 
 <div id="dream-roles">

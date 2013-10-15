@@ -59,3 +59,8 @@ li { margin: 5px; padding: 5px; display: inline-block; border:2px blue solid;}
 	padding-left: 5px;
 	cursor:pointer;
 }
+
+.loader {
+	display: none;
+	vertical-align: middle;
+}
