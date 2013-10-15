@@ -109,14 +109,19 @@ function organizeList(l) {
 		} else {
 			end = n.length - 1;
 		}
-		var t = n.slice(oldi,end);
-		f = f.concat(createSphereList(t),br);
-		oldi = oldi + i;
+		if (end > oldi) {
+		    var ti = n.slice(oldi,end);
+		    f = f.concat(createSphereList(ti),br);
+		    oldi = end;
+		}
 		if (oldi >= n.length - 1) {
 			break;
 		}
 	}
-	f.push(n[n.length - 1]);
+	    
+	if (oldi <= (n.length - 1)) {
+		f.push(n[n.length - 1]);
+	}
 	return f;
 }
 var _RoleData;
