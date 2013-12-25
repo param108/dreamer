@@ -40,7 +40,7 @@ function deleteHabit() {
 }
 
 // If there is only one selected choose it
-function selectRole() {
+function selectHabit() {
 	var word=$('#habit-text').val();
 	var found = null;
 	var foundsofar = 0;
@@ -61,18 +61,26 @@ function selectRole() {
 	}
 	return false;
 }
+
+function convertEaseToInt(a) {
+	switch(a) {
+		case 'auto': return 0;	
+		case 'easy': return 1;	
+		case 'hard': return 2;	
+        }
+
+}
 // sort the roles 
 function sortHabits(a,b) {
+	var al = convertEaseToInt(a.ease);
+	var bl = convertEaseToInt(b.ease);
         // we want the easy habits at the end
-        if (a.state == "easy" && b.state != "easy") {
-	    return -1;
-	}  
-        // we want the easy habits at the end
-        if (b.state == "easy" && a.state != "easy") {
-	    return 1;
-	}  
-        // most recently touched at the top
-	return b.t_elapsed - a.t_elapsed;	
+	var diff = al - bl;
+	if (diff == 0) {
+		return b.t_elapsed - a.t_elapsed;	
+        } else {
+		return diff;
+	}
 }
 
 function organizeList(l) {
@@ -123,7 +131,7 @@ function renderList(l) {
 			$('#sortable-delete').append('<li class="ui-state-default" habitid="'+habit.habitid+'"><a class="habitbtn">'+habit.name+'<img class="ul-x-btn" src="img/x.png"/></a></li>');
 			break;
 			case 'select':	
-			$('#sortable-select').append('<li class="ui-state-default" habitid="'+habit.habitid+'"><a class="habitbtn">'+habit.name+'</a></li>');
+			$('#sortable-select').append('<li class="ui-state-default" habitid="'+habit.habitid+'"><a class="habitbtn">'+habit.name+'</a>+habit.score+'/'+habit.days</li>');
 			break;
 			case 'add':
 			$('#sortable-add').append('<li class="ui-state-default" habitid="'+habit.habitid+'">'+habit.name+'</li>');
