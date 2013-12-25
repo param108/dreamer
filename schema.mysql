@@ -1,91 +1,112 @@
--- MySQL dump 10.13  Distrib 5.5.32, for debian-linux-gnu (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 2.11.11.3
+-- http://www.phpmyadmin.net
 --
--- Host: localhost    Database: excel
--- ------------------------------------------------------
--- Server version	5.5.32-0ubuntu0.12.04.1
+-- Host: 166.62.8.83
+-- Generation Time: Dec 25, 2013 at 05:34 AM
+-- Server version: 5.0.96
+-- PHP Version: 5.1.6
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Database: `exceluserdata`
+--
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `futures`
 --
 
 DROP TABLE IF EXISTS `futures`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `futures` (
   `uid` int(11) NOT NULL,
-  `futureId` int(11) NOT NULL AUTO_INCREMENT,
+  `futureId` int(11) NOT NULL auto_increment,
   `photo` varchar(100) NOT NULL,
   `text` varchar(100) NOT NULL,
   `size` varchar(20) NOT NULL,
-  PRIMARY KEY (`futureId`,`uid`)
+  PRIMARY KEY  (`futureId`,`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `habits`
+--
+
+DROP TABLE IF EXISTS `habits`;
+CREATE TABLE `habits` (
+  `uid` int(11) NOT NULL,
+  `habitid` int(11) NOT NULL auto_increment,
+  `name` varchar(50) default NULL,
+  `created` datetime default NULL,
+  `touch` datetime default NULL,
+  `score` int(11) NOT NULL,
+  `ease` enum('auto','easy','hard') default NULL,
+  PRIMARY KEY  (`habitid`,`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `habit_clicks`
+--
+
+DROP TABLE IF EXISTS `habit_clicks`;
+CREATE TABLE `habit_clicks` (
+  `habitid` int(11) default NULL,
+  `touch` datetime NOT NULL,
+  `score` int(11) NOT NULL,
+  `ease` enum('auto','easy','hard') default NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `roles`
 --
 
 DROP TABLE IF EXISTS `roles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `roles` (
   `uid` int(11) NOT NULL,
-  `roleid` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) DEFAULT NULL,
-  `touch` datetime DEFAULT NULL,
-  PRIMARY KEY (`roleid`,`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `roleid` int(11) NOT NULL auto_increment,
+  `name` varchar(50) default NULL,
+  `touch` datetime default NULL,
+  PRIMARY KEY  (`roleid`,`uid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
---
--- Table structure for table `user_session`
---
-
-DROP TABLE IF EXISTS `user_session`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_session` (
-  `session_key` varchar(100) DEFAULT NULL,
-  `expiry` int(11) DEFAULT NULL,
-  `data` varchar(1000) DEFAULT NULL,
-  `created` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
-  `password` varchar(100) DEFAULT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `verified` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`,`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+  `password` varchar(100) default NULL,
+  `id` int(11) NOT NULL auto_increment,
+  `verified` tinyint(1) default '0',
+  PRIMARY KEY  (`id`,`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+-- --------------------------------------------------------
 
--- Dump completed on 2013-09-28 17:51:00
+--
+-- Table structure for table `user_session`
+--
+
+DROP TABLE IF EXISTS `user_session`;
+CREATE TABLE `user_session` (
+  `session_key` varchar(100) default NULL,
+  `expiry` int(11) default NULL,
+  `data` varchar(1000) default NULL,
+  `created` datetime default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
