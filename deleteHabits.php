@@ -14,7 +14,7 @@ include_once('header.php');
 
 <div id="mod-btns">
 	<div id="delete-select-habit-btn">
-		<a href="habits.php">Select Role</a>
+		<a href="habits.php">Select Habit</a>
 	</div>
 </div>
 

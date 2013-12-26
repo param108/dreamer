@@ -13,8 +13,8 @@ include_once('header.php');
 <body>
 
 <div id="mod-btns">
-	<div id="delete-habit-btn"><a href="deleteHabits.php">Delete Roles</a></div>
-	<div id="add-habit-btn"> <a href="addHabits.php">Add Roles</a></div>
+	<div id="delete-habit-btn"><a href="deleteHabits.php">Delete Habits</a></div>
+	<div id="add-habit-btn"> <a href="addHabits.php">Add Habits</a></div>
 </div>
 <form id="habit-form"> 
 	<input id="habit-text" type=text name="dreamText"/><img class="loader" src="img/load.gif"></img>

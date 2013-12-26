@@ -18,7 +18,7 @@ if (!$stmt->execute(array(':uid' => $id, ':habitid' => $habitid))) {
 		$ret['e'] = 0;
 }	
 $stmt = $dbh->m_dbh->prepare("delete from habit_clicks where habitid=:habitid;",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-if (!$stmt->execute(array(':uid' => $id, ':habitid' => $habitid))) {
+if (!$stmt->execute(array(':habitid' => $habitid))) {
 		print_r($stmt->errorInfo());
 		$stmt->closeCursor();
 		$ret['e'] = 1;
