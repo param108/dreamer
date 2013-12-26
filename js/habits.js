@@ -105,6 +105,7 @@ function renderList(l) {
 			l = $.parseJSON(l);
 		} else {
 			_HabitData = [];
+			$('.loader').hide();
 			return;
 		}
 	}
@@ -131,7 +132,7 @@ function renderList(l) {
 			$('#sortable-delete').append('<li class="ui-state-default" habitid="'+habit.habitid+'"><a class="habitbtn">'+habit.name+'<img class="ul-x-btn" src="img/x.png"/></a></li>');
 			break;
 			case 'select':	
-			$('#sortable-select').append('<li class="ui-state-default" habitid="'+habit.habitid+'"><a class="habitbtn">'+habit.name+'</a>'+habit.score+'/'+habit.d_elapsed+'</li>');
+			$('#sortable-select').append('<li class="ui-state-default" habitid="'+habit.habitid+'"><a class="habitbtn">'+habit.name+'</a>'+' score:'+habit.score+'/'+habit.d_elapsed+'</li>');
 			break;
 			case 'add':
 			$('#sortable-add').append('<li class="ui-state-default" habitid="'+habit.habitid+'">'+habit.name+'</li>');

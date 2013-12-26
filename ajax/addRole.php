@@ -32,7 +32,6 @@ if (!$stmt->execute(array(':uid' => $id, ':name' => $name))) {
 		print_r($stmt->errorInfo());
 		$stmt->closeCursor();
 		$ret['e'] = 1;
-		return false;
 } else {
 		$ret['e'] = 0;
 }	

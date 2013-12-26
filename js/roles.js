@@ -143,6 +143,7 @@ function renderList(l) {
 			l = $.parseJSON(l);
 		} else {
 			_RoleData = [];
+			$('.loader').hide();
 			return;
 		}
 	}

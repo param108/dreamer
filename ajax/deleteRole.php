@@ -14,7 +14,6 @@ if (!$stmt->execute(array(':uid' => $id, ':roleid' => $roleid))) {
 		print_r($stmt->errorInfo());
 		$stmt->closeCursor();
 		$ret['e'] = 1;
-		return false;
 } else {
 		$ret['e'] = 0;
 }	
