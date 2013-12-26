@@ -133,7 +133,32 @@ function renderList(l) {
 			$('#sortable-delete').append('<li class="ui-state-default" habitid="'+habit.habitid+'"><a class="habitbtn">'+habit.name+'<img class="ul-x-btn" src="img/x.png"/></a></li>');
 			break;
 			case 'select':	
-			$('#sortable-select').append('<li class="ui-state-default" habitid="'+habit.habitid+'"><a class="habitbtn">'+habit.name+'</a>'+' score:'+habit.score+'/'+habit.d_elapsed+'</li>');
+			var easysel = '', autosel = '', hardsel = '';
+			if (habit.ease == 'easy') {
+				easysel = "selected";
+			} else if (habit.ease == 'hard') {
+				autosel = "selected";
+			} else if (habit.ease == 'auto') {
+				hardsel = "selected";
+			}
+			$('#sortable-select').append('<li class="sortable-select-li" habitid="'+habit.habitid+'">' +
+	'<span><button class="habit-expand" type="button">' +
+	'<img class="play-rt" src="img/prt.png"></img>' +
+	'<img class="play-dn" src="img/pdn.png"></img></button>' +
+	'<a class="habitbtn"><b>'+habit.name+'</b></a>'+
+   	' score:'+habit.score+'/'+habit.d_elapsed+' ease:'+habit.ease+'</span><br>' +
+	'<div class="habit-update-div">' +
+        '<span class="habit-update-input">' +
+        '<select class="habit-update-ease-select">' +
+          '<option class="habit-update-ease-auto" value="auto" '+ autosel +'>Automatic</option>' +
+          '<option class="habit-update-ease-easy" value="easy" '+ easysel +'>Easy</option>' +
+          '<option class="habit-update-ease-hard" value="hard" '+ hardsel + '>Hard</option>' +
+        '</select>' +
+        '<button class="habit-update-button" type="button">Update</button>' +
+        '<span>' +  
+        '<span class="habit-update-already-updated"><i>You have already updated this today</i></span>' +
+	'</div>' +
+	'</li>');
 			break;
 			case 'add':
 			$('#sortable-add').append('<li class="ui-state-default" habitid="'+habit.habitid+'">'+habit.name+'</li>');
