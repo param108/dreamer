@@ -1,0 +1,16 @@
+.play-dn {
+        display: none;
+        height: 12px;
+}
+.play-rt {
+        height: 12px;
+}
+
+.habit-update-already-updated {
+        display: none;
+}
+
+.habit-update-div {
+        display: none;
+}
+
