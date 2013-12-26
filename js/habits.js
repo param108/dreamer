@@ -137,9 +137,9 @@ function renderList(l) {
 			if (habit.ease == 'easy') {
 				easysel = "selected";
 			} else if (habit.ease == 'hard') {
-				autosel = "selected";
-			} else if (habit.ease == 'auto') {
 				hardsel = "selected";
+			} else if (habit.ease == 'auto') {
+				autosel = "selected";
 			}
 			$('#sortable-select').append('<li class="sortable-select-li" habitid="'+habit.habitid+'">' +
 	'<span><button class="habit-expand" type="button">' +
