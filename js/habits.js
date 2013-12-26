@@ -105,17 +105,18 @@ function renderList(l) {
 			l = $.parseJSON(l);
 		} else {
 			_HabitData = [];
+			$('#sortable-delete').empty();
+			$('#sortable-select').empty();
+			$('#sortable-add').empty();
 			$('.loader').hide();
 			return;
 		}
 	}
 	_HabitData = l;
 	var spherlist = organizeList(l);
-	if (spherlist) {
-			$('#sortable-delete').empty();
-			$('#sortable-select').empty();
-			$('#sortable-add').empty();
-	}
+	$('#sortable-delete').empty();
+	$('#sortable-select').empty();
+	$('#sortable-add').empty();
 	var pageType="delete";
 	if ($('#sortable-delete').length > 0) {
 				pageType = "delete";
