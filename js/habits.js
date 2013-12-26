@@ -184,6 +184,7 @@ function renderList(l) {
 		break;
 	}
 	$('.loader').hide();
+        $('.habit-expand').click(habitExpandClick);
 }
 
 function isalpha(c) {
@@ -279,12 +280,6 @@ $(document).ready(function() {
 	}
 	$('#habit-text').keyup(searchHabit);
 	$('.loader').show();
-        $('.habit-expand').click(habitExpandClick);
-        $('#sortable-select').find('.sortable-select-li').each(
-                function (index) {
-                        var habitid = $(this).attr("habitid");
-                }
-        );
 	$.post("ajax/getHabits.php", renderList);
 	//var rolesList = [{t_elapsed: 10, role: 'Father'},
 	//		{t_elapsed: 1, role: 'Gamer'},
