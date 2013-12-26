@@ -252,6 +252,17 @@ function deleteHabitBtnClicked(event) {
 	return false;
 }
 
+function habitExpandClick(event) {
+        var target = event.target;
+        var t1,t2;
+        if (t2 = $(target).parent().find('.play-rt').toggle().is(':visible')) {
+                $(target).parents('li').find('.habit-update-div').hide();
+        }
+        if (t1 = $(target).parent().find('.play-dn').toggle().is(':visible')) {
+                $(target).parents('li').find('.habit-update-div').show();
+        }
+}
+
 $(document).ready(function() {
 	if ($('#sortable-add').length > 0) {
 		$('.habit-btn').val('Add');
@@ -268,6 +279,12 @@ $(document).ready(function() {
 	}
 	$('#habit-text').keyup(searchHabit);
 	$('.loader').show();
+        $('.habit-expand').click(habitExpandClick);
+        $('#sortable-select').find('.sortable-select-li').each(
+                function (index) {
+                        var habitid = $(this).attr("habitid");
+                }
+        );
 	$.post("ajax/getHabits.php", renderList);
 	//var rolesList = [{t_elapsed: 10, role: 'Father'},
 	//		{t_elapsed: 1, role: 'Gamer'},
