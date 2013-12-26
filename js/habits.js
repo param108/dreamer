@@ -11,7 +11,7 @@ function addNewHabit() {
 		});
 	} else {
 		$("#habit-text").val('');
-		searchRole(null);
+		searchHabit(null);
 		//FIXME add a dialog here
 	}
 	return false;
@@ -131,7 +131,7 @@ function renderList(l) {
 			$('#sortable-delete').append('<li class="ui-state-default" habitid="'+habit.habitid+'"><a class="habitbtn">'+habit.name+'<img class="ul-x-btn" src="img/x.png"/></a></li>');
 			break;
 			case 'select':	
-			$('#sortable-select').append('<li class="ui-state-default" habitid="'+habit.habitid+'"><a class="habitbtn">'+habit.name+'</a>+habit.score+'/'+habit.days</li>');
+			$('#sortable-select').append('<li class="ui-state-default" habitid="'+habit.habitid+'"><a class="habitbtn">'+habit.name+'</a>'+habit.score+'/'+habit.d_elapsed+'</li>');
 			break;
 			case 'add':
 			$('#sortable-add').append('<li class="ui-state-default" habitid="'+habit.habitid+'">'+habit.name+'</li>');
@@ -192,7 +192,7 @@ function searchHabit(event) {
 function selectHabitBtnClicked(event) {
 	var target = event.target;
 	var habitid = $(target).parent().attr('habitid');
-	var url="habits.php?habitid="+habitid;
+	var url="renderHabit.php?habitid="+habitid;
 	window.location.assign(url);
 	return false;
 }
