@@ -99,6 +99,19 @@ function habitExists(word) {
 	return false;
 }
 
+function habitUpdateClick(event) {
+	var habitid = $(this).attr('habitid');
+	var ease = $(this).parent('li').find('.habit-update-ease-select').val();
+	$.post("ajax/updateHabit.php", { habitid: habitid, ease: ease}, function (data) {
+		var out = $.parseJSON(data);
+		if (out.e != 1) {
+	            $('li[habitid="'+habitid+'"]').find('.habit-update-successfully-updated').show();
+	            $('li[habitid="'+habitid+'"]').find('.habit-update-input').hide();
+		}
+	});
+
+}
+
 function renderList(l) {
 	if (typeof l == "string") {
 		if (l != '') {
@@ -154,9 +167,10 @@ function renderList(l) {
           '<option class="habit-update-ease-easy" value="easy" '+ easysel +'>Easy</option>' +
           '<option class="habit-update-ease-hard" value="hard" '+ hardsel + '>Hard</option>' +
         '</select>' +
-        '<button class="habit-update-button" type="button">Update</button>' +
+        '<button class="habit-update-button" habitid="'+habit.habitid+'" type="button">Update</button>' +
         '</span>' +  
         '<span class="habit-update-already-updated"><i>You have already updated this today</i></span>' +
+        '<span class="habit-update-successfully-updated"><i>You have successfully updated this</i></span>' +
 	'</div>' +
 	'</li>');
 			break;

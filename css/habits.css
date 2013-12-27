@@ -10,6 +10,10 @@
         display: none;
 }
 
+.habit-update-successfully-updated {
+        display: none;
+}
+
 .habit-update-div {
         display: none;
 }
