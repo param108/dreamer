@@ -168,6 +168,11 @@ function renderList(l) {
 		$('#sortable-delete').append('<br>');
 		$('#sortable-select').append('<br>');
 		$('#sortable-add').append('<br>');
+	        if (habit.t_elapsed < 1) {
+	            $('li[habitid="'+habit.habitid+'"]').find('.habit-update-already-updated').show();
+	            $('li[habitid="'+habit.habitid+'"]').find('.habit-update-input').hide();
+	        }
+
 	}
 
 	switch (pageType) {
