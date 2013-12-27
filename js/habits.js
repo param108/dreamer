@@ -155,7 +155,7 @@ function renderList(l) {
           '<option class="habit-update-ease-hard" value="hard" '+ hardsel + '>Hard</option>' +
         '</select>' +
         '<button class="habit-update-button" type="button">Update</button>' +
-        '<span>' +  
+        '</span>' +  
         '<span class="habit-update-already-updated"><i>You have already updated this today</i></span>' +
 	'</div>' +
 	'</li>');
