@@ -11,8 +11,8 @@ $ret = array('e' => 0);
 $dbh = new dbm(DBHOST,DBMAIN, DBUSER, DBPASS);
 
 /* read score now, so we dont have to wait for  writes to go through */
-$stmt = $dbh->m_dbh->prepare("select score from habits where uid =:id;",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY)); 
-$stmt->execute(array(':id' => $id));
+$stmt = $dbh->m_dbh->prepare("select score from habits where uid =:id and habitid=:habitid;",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY)); 
+$stmt->execute(array(':id' => $id, ':habitid' => $habitid));
 $row = $stmt->fetchall(PDO::FETCH_ASSOC);
 if ((!$row) || (count($row) == 0) || (count($row)>1)) {
                 print_r($stmt->errorInfo());
