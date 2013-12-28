@@ -18,3 +18,7 @@
         display: none;
 }
 
+.habit-update-loader {
+        display: none;
+        vertical-align: middle;
+}
