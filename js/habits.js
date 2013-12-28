@@ -99,6 +99,18 @@ function habitExists(word) {
 	return false;
 }
 
+function updateHabitData(habitid, ease) {
+	for (var i = 0; i< _HabitData.length;i++) {
+		if (_HabitData[i].habitid == habitid) {
+			_HabitData[i].ease = ease;	
+			_HabitData[i].score = _HabitData[i].score + 1;	
+			$('li[habitid="' + habitid +'"]').find('habit-expand-info').empty();
+			$('li[habitid="' + habitid +'"]').find('habit-expand-info').text('score:'+_HabitData[i].score+'/'+_HabitData[i].d_elapsed+' ease:'+_HabitData[i].ease);
+			break;
+		}
+	}
+}
+
 function habitUpdateClick(event) {
 	var habitid = $(this).attr('habitid');
 	var ease = $(this).parents('li').find('.habit-update-ease-select').val();
@@ -108,6 +120,7 @@ function habitUpdateClick(event) {
 		if (out.e != 1) {
 	            $('li[habitid="'+habitid+'"]').find('.habit-update-successfully-updated').show();
 	            $('li[habitid="'+habitid+'"]').find('.habit-update-input').hide();
+		    updateHabitData(habitid, ease);
 		}
                 $('li[habitid="'+habitid+'"]').find('.habit-update-loader').hide();
 	});
@@ -160,7 +173,7 @@ function renderList(l) {
 	'<img class="play-rt" src="img/prt.png"></img>' +
 	'<img class="play-dn" src="img/pdn.png"></img></button>' +
 	'<a class="habitbtn"><b>'+habit.name+'</b></a>'+
-   	' score:'+habit.score+'/'+habit.d_elapsed+' ease:'+habit.ease+'</span><br>' +
+   	' <span class="habit-expand-info">score:'+habit.score+'/'+habit.d_elapsed+' ease:'+habit.ease+'</span></span><br>' +
 	'<div class="habit-update-div">' +
         '<span class="habit-update-input">' +
         '<select class="habit-update-ease-select">' +
