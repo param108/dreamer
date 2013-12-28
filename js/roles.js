@@ -1,3 +1,4 @@
+var _TZOFFSET;
 function addNewRole() {
 	var newRole = $("#dream-text").val();
 	newRole = newRole.replace(/\s+/g, ' ');
@@ -7,7 +8,7 @@ function addNewRole() {
 		$.post("ajax/addRole.php", { name: newRole}, function (data) {
 			var out = $.parseJSON(data);
 			$("#dream-text").val('');
-			$.post("ajax/getRoles.php", renderList);
+			$.post("ajax/getRoles.php", { tzoffset: _TZOFFSET}, renderList);
 		});
 	} else {
 		$("#dream-text").val('');
@@ -246,7 +247,7 @@ function deleteRoleBtnXClicked(event) {
 		var out = $.parseJSON(data);
 		if (out.e != 1) {
 			$("#dream-text").val('');
-			$.post("ajax/getRoles.php", renderList);
+			$.post("ajax/getRoles.php", { tzoffset: _TZOFFSET}, renderList);
 		}
 	});
 	return false;
@@ -260,13 +261,17 @@ function deleteRoleBtnClicked(event) {
 		var out = $.parseJSON(data);
 		if (out.e != 1) {
 			$("#dream-text").val('');
-			$.post("ajax/getRoles.php", renderList);
+			$.post("ajax/getRoles.php", { tzoffset: _TZOFFSET}, renderList);
 		}
 	});
 	return false;
 }
 
 $(document).ready(function() {
+
+	var d = new Date();
+	_TZOFFSET = d.getTimezoneOffset();
+
 	if ($('#sortable-add').length > 0) {
 		$('.dream-btn').val('Add');
 		$("#role-form").submit(addNewRole);	
@@ -282,7 +287,7 @@ $(document).ready(function() {
 	}
 	$('#dream-text').keyup(searchRole);
 	$('.loader').show();
-	$.post("ajax/getRoles.php", renderList);
+	$.post("ajax/getRoles.php", { tzoffset: _TZOFFSET}, renderList);
 	//var rolesList = [{t_elapsed: 10, role: 'Father'},
 	//		{t_elapsed: 1, role: 'Gamer'},
 	//		{t_elapsed: 19, role: 'Artist'},

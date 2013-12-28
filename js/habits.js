@@ -1,3 +1,6 @@
+
+var _TZOFFSET;
+
 function addNewHabit() {
 	var newHabit = $("#habit-text").val();
 	newHabit = newHabit.replace(/\s+/g, ' ');
@@ -7,7 +10,7 @@ function addNewHabit() {
 		$.post("ajax/addHabit.php", { name: newHabit}, function (data) {
 			var out = $.parseJSON(data);
 			$("#habit-text").val('');
-			$.post("ajax/getHabits.php", renderList);
+			$.post("ajax/getHabits.php", { tzoffset: _TZOFFSET} , renderList);
 		});
 	} else {
 		$("#habit-text").val('');
@@ -268,7 +271,7 @@ function deleteHabitBtnXClicked(event) {
 		var out = $.parseJSON(data);
 		if (out.e != 1) {
 			$("#habit-text").val('');
-			$.post("ajax/getHabits.php", renderList);
+			$.post("ajax/getHabits.php", { tzoffset: _TZOFFSET} ,renderList);
 		}
 	});
 	return false;
@@ -282,7 +285,7 @@ function deleteHabitBtnClicked(event) {
 		var out = $.parseJSON(data);
 		if (out.e != 1) {
 			$("#habit-text").val('');
-			$.post("ajax/getHabits.php", renderList);
+			$.post("ajax/getHabits.php", { tzoffset: _TZOFFSET} ,renderList);
 		}
 	});
 	return false;
@@ -300,6 +303,9 @@ function habitExpandClick(event) {
 }
 
 $(document).ready(function() {
+	var d = new Date();
+	_TZOFFSET = d.getTimezoneOffset();
+
 	if ($('#sortable-add').length > 0) {
 		$('.habit-btn').val('Add');
 		$("#habit-form").submit(addNewHabit);	
@@ -315,7 +321,7 @@ $(document).ready(function() {
 	}
 	$('#habit-text').keyup(searchHabit);
 	$('.loader').show();
-	$.post("ajax/getHabits.php", renderList);
+	$.post("ajax/getHabits.php", { tzoffset: _TZOFFSET }, renderList);
 	//var rolesList = [{t_elapsed: 10, role: 'Father'},
 	//		{t_elapsed: 1, role: 'Gamer'},
 	//		{t_elapsed: 19, role: 'Artist'},
