@@ -104,8 +104,8 @@ function updateHabitData(habitid, ease) {
 		if (_HabitData[i].habitid == habitid) {
 			_HabitData[i].ease = ease;	
 			_HabitData[i].score = _HabitData[i].score + 1;	
-			$('li[habitid="' + habitid +'"]').find('habit-expand-info').empty();
-			$('li[habitid="' + habitid +'"]').find('habit-expand-info').text('score:'+_HabitData[i].score+'/'+_HabitData[i].d_elapsed+' ease:'+_HabitData[i].ease);
+			$('li[habitid="' + habitid +'"]').find('.habit-expand-info').empty();
+			$('li[habitid="' + habitid +'"]').find('.habit-expand-info').text('score:'+_HabitData[i].score+'/'+_HabitData[i].d_elapsed+' ease:'+_HabitData[i].ease);
 			break;
 		}
 	}
