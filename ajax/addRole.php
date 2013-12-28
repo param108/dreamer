@@ -27,7 +27,7 @@ if ($row && count($row) > 0) {
 		}
 	}
 }
-$stmt = $dbh->m_dbh->prepare("insert into roles values(:uid,DEFAULT,:name,NOW());",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$stmt = $dbh->m_dbh->prepare("insert into roles values(:uid,DEFAULT,:name,UTC_TIMESTAMP());",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 if (!$stmt->execute(array(':uid' => $id, ':name' => $name))) {
 		print_r($stmt->errorInfo());
 		$stmt->closeCursor();

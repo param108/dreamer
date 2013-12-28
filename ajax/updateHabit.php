@@ -25,7 +25,7 @@ if ((!$row) || (count($row) == 0) || (count($row)>1)) {
 $score = $row[0]['score'];
 $score = $score + 1;
 
-$stmt = $dbh->m_dbh->prepare("update habits set score=score + 1, ease=:ease, touch=NOW() where uid=:uid and habitid=:habitid;",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$stmt = $dbh->m_dbh->prepare("update habits set score=score + 1, ease=:ease, touch=UTC_TIMESTAMP() where uid=:uid and habitid=:habitid;",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 if (!$stmt->execute(array(':uid' => $id, ':ease' => $ease, ':habitid' => $habitid))) {
                 print_r($stmt->errorInfo());
                 $stmt->closeCursor();
@@ -34,7 +34,7 @@ if (!$stmt->execute(array(':uid' => $id, ':ease' => $ease, ':habitid' => $habiti
                 die($out);
 }
 
-$stmt = $dbh->m_dbh->prepare("insert into habit_clicks values(:habitid,NOW(),:score,:ease);",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$stmt = $dbh->m_dbh->prepare("insert into habit_clicks values(:habitid,UTC_TIMESTAMP(),:score,:ease);",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 if (!$stmt->execute(array(':habitid' => $id, ':ease' => $ease, ':score' => $score))) {
                 print_r($stmt->errorInfo());
                 $stmt->closeCursor();
