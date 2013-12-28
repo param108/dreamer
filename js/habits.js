@@ -101,7 +101,7 @@ function habitExists(word) {
 
 function habitUpdateClick(event) {
 	var habitid = $(this).attr('habitid');
-	var ease = $(this).parent('li').find('.habit-update-ease-select').val();
+	var ease = $(this).parents('li').find('.habit-update-ease-select').val();
         $('li[habitid="'+habitid+'"]').find('.habit-update-loader').show();
 	$.post("ajax/updateHabit.php", { habitid: habitid, ease: ease}, function (data) {
 		var out = $.parseJSON(data);
