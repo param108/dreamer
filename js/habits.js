@@ -103,7 +103,7 @@ function updateHabitData(habitid, ease) {
 	for (var i = 0; i< _HabitData.length;i++) {
 		if (_HabitData[i].habitid == habitid) {
 			_HabitData[i].ease = ease;	
-			_HabitData[i].score = _HabitData[i].score + 1;	
+			_HabitData[i].score = (parseInt(_HabitData[i].score) + 1)+"";	
 			$('li[habitid="' + habitid +'"]').find('.habit-expand-info').empty();
 			$('li[habitid="' + habitid +'"]').find('.habit-expand-info').text('score:'+_HabitData[i].score+'/'+_HabitData[i].d_elapsed+' ease:'+_HabitData[i].ease);
 			break;
