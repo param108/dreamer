@@ -1,4 +1,11 @@
 <?php
+
+if (empty($_SERVER['HTTPS'])) {
+    $redirect = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    header("Location: $redirect");
+    die();
+}
+
 include_once('php/tokens.php');
 include_once('php/dbconfig.php');
 include_once('php/dbm.class.php');
