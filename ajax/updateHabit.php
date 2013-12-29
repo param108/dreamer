@@ -35,7 +35,7 @@ if (!$stmt->execute(array(':uid' => $id, ':ease' => $ease, ':habitid' => $habiti
 }
 
 $stmt = $dbh->m_dbh->prepare("insert into habit_clicks values(:habitid,UTC_TIMESTAMP(),:score,:ease);",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-if (!$stmt->execute(array(':habitid' => $id, ':ease' => $ease, ':score' => $score))) {
+if (!$stmt->execute(array(':habitid' => $habitid, ':ease' => $ease, ':score' => $score))) {
                 print_r($stmt->errorInfo());
                 $stmt->closeCursor();
                 $ret['e'] = 1;
