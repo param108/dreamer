@@ -36,5 +36,6 @@ $csrf = generate_token(60);
 			</div>
 		</form>
 		New User? <a href="signup.php">Sign Up</a>
+		Forgot your password? <a href="forgotPassword.php">Reset Password</a>
 	</body>
 </html>
