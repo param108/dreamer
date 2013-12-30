@@ -8,6 +8,7 @@ if (empty($_SERVER['HTTPS'])) {
 
 include_once('php/tokens.php');
 include_once('php/email.php');
+include_once('php/users.php');
 // get the password and username
 $csrf = $_POST['csrf'];
 if (!verify_token($csrf)) {
