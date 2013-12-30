@@ -9,7 +9,7 @@ $csrf = generate_token(60);
 	<body>
 		<div style="width:100%;">
 		Forgot your password? fill in your email address below and we will send you a reset email!
-		<form id='send-email-form' action="sendpwreset.php">
+		<form id='send-email-form' action="sendpwreset.php" method="post">
 			<div><input type='hidden' name='csrf' value='<?=$csrf?>'</div>
 			<div style="width:100%;">
 			email: <input type="text" name='username'>
