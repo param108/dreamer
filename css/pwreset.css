@@ -1,0 +1,39 @@
+
+#pwreset-unmatched-msg {
+	display: none;
+}
+
+#pwreset-invalid-msg {
+	display: none;
+}
+#pwreset-update-failed-msg {
+	display: none;
+}
+#pwreset-update-success-msg {
+	display: none;
+}
+.token-expired-hide {
+        display: none;
+}               
+.token-expired-show {
+        display: block;
+}       
+
+.pwreset-hide{
+        display: none;
+}
+.pwreset-show {
+        display: block;
+}
+
+#pwreset-input-newpwd {
+        margin-left: 3.5em;
+}
+
+.user-not-found-show {
+        display: block;
+}
+
+.user-not-found-show {
+        display: none;
+}
