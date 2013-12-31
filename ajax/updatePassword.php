@@ -10,7 +10,7 @@ $email = $DREAMER_DATA['email'];
 $pwd = $_POST['newpwd'];
 
 $dbh = new dbm(DBHOST,DBMAIN, DBUSER, DBPASS);
-$stmt = $dbh->m_dbh->prepare("update users set password=SHA1(:pwd) where id=:id email=:em",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$stmt = $dbh->m_dbh->prepare("update users set password=SHA1(:pwd) where id=:id and email=:em",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 if (!$stmt->execute(array(':id' => $id, ':em' => $email, ':pwd' => $pwd))){
 	$stmt->closeCursor();
 	$ret['e'] = 1;
