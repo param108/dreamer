@@ -42,7 +42,7 @@ function show_pwreset($t) {
 if (!$tokenexpired) {
 	$data = json_decode($data,true);
 	$email = $data['email'];
-
+	$uid = 0;
 	if (!empty($email)) {
 		$uid = user_exists_nopasswd($email);
 		if ($uid === false) {
@@ -53,8 +53,8 @@ if (!$tokenexpired) {
 		$user_does_not_exist = true;
 	}
 
-	if (!$user_does_not_exit) {
-		$login_token = generate_token(600,'{"u":"'.$id.'","ip":"'.$_SERVER['REMOTE_ADDR'].'","port":"'.$_SERVER['REMOTE_PORT'].'","email":"'.$email.'"}');
+	if (!$user_does_not_exist) {
+		$login_token = generate_token(600,'{"u":"'.$uid.'","ip":"'.$_SERVER['REMOTE_ADDR'].'","port":"'.$_SERVER['REMOTE_PORT'].'","email":"'.$email.'"}');
 		setcookie('at',$login_token);
 	}
 }

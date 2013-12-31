@@ -31,7 +31,7 @@ function pwreset_template($username) {
 	'</head>'.
 	'<body>'.
 		'<div class="email-header"><a href="'.MAINURL.'/login.php">Laghava.com</a></div>'.
-		'<div class="email-body"><b>Hi!</b>,<br> To verify your email on Laghava.com Just click <a href="'.MAINURL.'/pwreset.php?id='.generate_verification_token($username).
+		'<div class="email-body"><b>Hi!</b>,<br> To reset your password on Laghava.com Just click <a href="'.MAINURL.'/pwreset.php?id='.generate_verification_token($username).
 		'">Here</a></div>'.
 	'</body>'.
 	'</html>';
