@@ -4,7 +4,7 @@ include_once('header.php');
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Roles</title>
+  <title>Habits</title>
   <script src="js/jquery.js"></script>
   <script src="js/jquery-ui.js"></script>
   <script src="js/habits.js"></script>
