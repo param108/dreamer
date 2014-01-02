@@ -9,7 +9,9 @@ include_once("header.php");
 	</head>
 	<body>
 		<div id="memories">
+		<div id="tools">
 		<b>Tools</b>: <br><a href='habits.php'><b>Habits:<b></a><br><i>create and track habits, to create a future.</i>
+		</div>
 		<div>
 		<div id="badges-tab">
 		</div>
