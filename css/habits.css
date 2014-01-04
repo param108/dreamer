@@ -1,9 +1,11 @@
 .play-dn {
         display: none;
-        height: 12px;
+        height: 25px;
+        vertical-align: middle;
 }
 .play-rt {
-        height: 12px;
+        height: 25px;
+        vertical-align: middle;
 }
 
 .habit-update-already-updated {
@@ -21,4 +23,12 @@
 .habit-update-loader {
         display: none;
         vertical-align: middle;
+}
+
+.habit-expand {
+	margin-right: 5px;
+}
+
+ul {
+	list-style-type:none;
 }
