@@ -115,6 +115,7 @@ function updateHabitData(habitid, ease) {
 }
 
 function habitUpdateClick(event) {
+	$( this ).unbind('click');
 	var habitid = $(this).attr('habitid');
 	var ease = $(this).parents('li').find('.habit-update-ease-select').val();
         $('li[habitid="'+habitid+'"]').find('.habit-update-loader').show();
@@ -126,6 +127,7 @@ function habitUpdateClick(event) {
 		    updateHabitData(habitid, ease);
 		}
                 $('li[habitid="'+habitid+'"]').find('.habit-update-loader').hide();
+		$( this ).click(habitUpdateClick);
 	});
 }
 
